@@ -1,22 +1,22 @@
 <template>
-  <q-page class="flex flex-center">
-    <q-header elevated>
-      <q-toolbar>
-        <q-toolbar-title class="text-center">
-          {{ titulo }}
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
-    <q-body v-if="filmes.length" class="text-center">
-      <div :key="filme.id" v-for="(filme, chave) in filmes">
-        <img :src="'https://image.tmdb.org/t/p/w500/' + filme.poster_path" :alt="filme.original_title">
-        <h2>{{(chave+1) + '. ' + filme.original_title }}</h2>
-      </div>
-    </q-body>
-  </q-page>
+  <div class="row">
+    <q-card :key="filme.id" v-for="(filme) in filmes" class="my-card col-3">
+      <q-img
+        :src="'https://image.tmdb.org/t/p/w500/' + filme.poster_path" :alt="filme.original_title"
+        basic
+      >
+        <div class="absolute-bottom text-subtitle2 text-center">
+          {{ filme.title }}
+        </div>
+      </q-img>
+    </q-card>
+  </div>
 </template>
 
 <style>
+  .my-card {
+    max-width: 250px;
+  }
 </style>
 
 <script>
@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted () {
-    this.$axios.get('https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f661bc3a7d6de05dd66918f3816b5c45').then((response) => {
+    this.$axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f661bc3a7d6de05dd66918f3816b5c45&language=pt-BR').then((response) => {
       this.filmes = response.data.results
     })
   }
