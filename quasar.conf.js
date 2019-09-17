@@ -44,11 +44,15 @@ module.exports = function (ctx) {
         'QIcon',
         'QList',
         'QItem',
+        'QBar',
         'QItemSection',
         'QItemLabel',
         'QCard',
+        'QSpace',
         'QCardSection',
         'QCardActions',
+        'QDialog',
+        'QTooltip',
         'QImg'
       ],
 
