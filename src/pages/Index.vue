@@ -17,24 +17,33 @@
       :maximized="maximizedToggle"
       transition-show="slide-up"
       transition-hide="slide-down"
+      content-style="'opacity: 0.5"
+      @click="dialog = false"
     >
-      <q-card class="bg-primary text-white">
+      <q-img
+        v-if="filmeDetalhes && filmeDetalhes.poster_path"
+        :src="'https://image.tmdb.org/t/p/w500/' + filmeDetalhes.poster_path"
+        basic
+        content-style="'opacity: 0.9"
+      >
+      <q-card class="bg-dark text-white relative-position">
         <q-bar>
           <q-space />
 
-          <q-btn dense flat icon="close" @click="dialog = false">
+          <q-btn dense flat icon="close">
             <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
           </q-btn>
         </q-bar>
 
         <q-card-section>
-          <div class="text-h6">{{ filmeDetalhes.title }}</div>
+          <div class="text-h6 text-center">{{ filmeDetalhes.title }}</div>
         </q-card-section>
 
-        <q-card-section>
+        <q-card-section class="text-center">
           {{ filmeDetalhes.overview }}
         </q-card-section>
       </q-card>
+      </q-img>
     </q-dialog>
   </div>
 </template>
