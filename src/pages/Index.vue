@@ -24,14 +24,14 @@
                   </q-field>
                   <q-field
                     icon="cloud"
-                    label="Password"
+                    label="Senha"
                     helper="Helper"
                   >
                     <q-input type="password" v-model="credentials.password" />
                   </q-field>
-                  <div class="submit row reverse">
+                  <div class="submit row reverse" style="margin-top: 20px;">
                     <q-btn color="primary" @click="logado = 1">Logar</q-btn>
-<!--                    <q-btn color="secondary">Cancel</q-btn>-->
+                    <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;">Registrar</q-btn>
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
       <q-header elevated>
         <q-toolbar>
           <q-toolbar-title>
-            Quasar App
+            Lançamentos
           </q-toolbar-title>
 
           <div><a href="#" style="color: #FFF;" @click="logado = 0">Sair</a></div>
