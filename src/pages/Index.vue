@@ -1,52 +1,55 @@
 <template>
-  <div class="row">
-    <div class="login" v-if="!logado">
-      <div>
-        <div class="input-page window-width bg-light column items-center no-wrap">
-          <div class="input-card shadow-4 bg-white column items-center justify-center no-wrap">
+  <div class="content">
+    <div class="form-login">
+      <div class="login" v-if="!logado">
+        <div>
+          <div class="input-page window-width bg-light column items-center no-wrap">
+            <div class="input-card shadow-4 bg-white column items-center justify-center no-wrap">
 
-            <div class="full-width">
-              <q-toolbar color="secondary">
-                <q-icon name="edit" />
-                <q-toolbar-title>
-                  Login
-                </q-toolbar-title>
-              </q-toolbar>
+              <div class="full-width">
+                <q-toolbar color="secondary">
+                  <q-icon name="edit" />
+                  <q-toolbar-title>
+                    Login
+                  </q-toolbar-title>
+                </q-toolbar>
 
-              <div class="layout-view layout-padding">
-                <q-field
-                  icon="cloud"
-                  label="Email"
-                  helper="Helper"
-                >
-                  <q-input v-model="credentials.email" />
-                </q-field>
-                <q-field
-                  icon="cloud"
-                  label="Password"
-                  helper="Helper"
-                >
-                  <q-input type="password" v-model="credentials.password" />
-                </q-field>
-                <div class="submit row reverse">
-                  <q-btn color="primary" @click="logado = 1">Login</q-btn>
-                  <q-btn color="secondary">Cancel</q-btn>
+                <div class="layout-view layout-padding">
+                  <q-field
+                    icon="cloud"
+                    label="Email"
+                    helper="Helper"
+                  >
+                    <q-input v-model="credentials.email" />
+                  </q-field>
+                  <q-field
+                    icon="cloud"
+                    label="Password"
+                    helper="Helper"
+                  >
+                    <q-input type="password" v-model="credentials.password" />
+                  </q-field>
+                  <div class="submit row reverse">
+                    <q-btn color="primary" @click="logado = 1">Login</q-btn>
+                    <q-btn color="secondary">Cancel</q-btn>
+                  </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="movies" v-show="logado">
+
+    <div class="row" v-show="logado">
       <q-header elevated>
         <q-toolbar>
           <q-toolbar-title>
             Quasar App
           </q-toolbar-title>
 
-          <div><a @click="logado=false" href="#" style="color: #FFF;">Sair</a></div>
+          <div><a href="#" style="color: #FFF;" @click="logado = 0">Sair</a></div>
         </q-toolbar>
       </q-header>
 
@@ -103,7 +106,6 @@
   .my-card {
     max-width: 250px;
   }
-
   .input-card {
     border-radius: 5px;
     margin-top: -50px;
@@ -120,9 +122,9 @@ export default {
   name: 'PageIndex',
   data: function () {
     return {
-      credentials: { password: '', email: '' },
-      logado: 1,
       titulo: 'PopFilmes',
+      credentials: { password: '', email: '' },
+      logado: 0,
       filmes: [],
       filmeDetalhes: '',
       dialog: false,
