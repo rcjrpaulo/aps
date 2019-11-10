@@ -1,11 +1,11 @@
 <template>
   <div class="content">
+<!--    TELA DE LOGIN-->
     <div class="form-login">
-      <div class="login" v-if="!logado">
+      <div class="login" v-if="!logado && !telaRegistro">
         <div>
           <div class="input-page window-width bg-light column items-center no-wrap">
             <div class="input-card shadow-4 bg-white column items-center justify-center no-wrap">
-
               <div class="full-width">
                 <q-toolbar color="secondary">
                   <q-icon name="edit" />
@@ -31,18 +31,57 @@
                   </q-field>
                   <div class="submit row reverse" style="margin-top: 20px;">
                     <q-btn color="primary" @click="logado = 1">Logar</q-btn>
-                    <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;">Registrar</q-btn>
+                    <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;" @click="telaRegistro = 1">Registrar</q-btn>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row" v-show="logado">
+    <!--    TELA DE CADASTRO-->
+    <div class="form-login">
+      <div class="login" v-if="!logado && telaRegistro">
+        <div>
+          <div class="input-page window-width bg-light column items-center no-wrap">
+            <div class="input-card shadow-4 bg-white column items-center justify-center no-wrap">
+              <div class="full-width">
+                <q-toolbar color="secondary">
+                  <q-icon name="edit" />
+                  <q-toolbar-title>
+                    Cadastro de usuário
+                  </q-toolbar-title>
+                </q-toolbar>
+
+                <div class="layout-view layout-padding">
+                  <q-field
+                    icon="cloud"
+                    label="Email de autenticação"
+                    helper="Helper"
+                  >
+                    <q-input v-model="credentials.email" />
+                  </q-field>
+                  <q-field
+                    icon="cloud"
+                    label="Senha"
+                    helper="Helper"
+                  >
+                    <q-input type="password" v-model="credentials.password" />
+                  </q-field>
+                  <div class="submit row reverse" style="margin-top: 20px;">
+                    <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;" @click="telaRegistro = 0">Registrar</q-btn>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--    TELA DE FILMES-->
+    <div class="row movies" v-show="logado">
       <q-header elevated>
         <q-toolbar>
           <q-toolbar-title>
@@ -125,6 +164,7 @@ export default {
       titulo: 'PopFilmes',
       credentials: { password: '', email: '' },
       logado: 0,
+      telaRegistro: 0,
       filmes: [],
       filmeDetalhes: '',
       dialog: false,
