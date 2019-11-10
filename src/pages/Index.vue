@@ -30,8 +30,8 @@
                     <q-input type="password" v-model="credentials.password" />
                   </q-field>
                   <div class="submit row reverse">
-                    <q-btn color="primary" @click="logado = 1">Login</q-btn>
-                    <q-btn color="secondary">Cancel</q-btn>
+                    <q-btn color="primary" @click="logado = 1">Logar</q-btn>
+<!--                    <q-btn color="secondary">Cancel</q-btn>-->
                   </div>
                 </div>
               </div>
