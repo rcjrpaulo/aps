@@ -53,6 +53,8 @@ module.exports = function (ctx) {
         'QCardActions',
         'QDialog',
         'QTooltip',
+        'QField',
+        'QInput',
         'QImg'
       ],
 
