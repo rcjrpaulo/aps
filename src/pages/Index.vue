@@ -1,5 +1,15 @@
 <template>
   <div class="row">
+    <q-header elevated>
+      <q-toolbar>
+        <q-toolbar-title>
+          Quasar App
+        </q-toolbar-title>
+
+        <div><a href="#" style="color: #FFF;">Sair</a></div>
+      </q-toolbar>
+    </q-header>
+
     <q-card @click="carregaDetalhes(filme.id)" :key="filme.id" v-for="(filme) in filmes" class="my-card col-3">
       <q-img
         :src="'https://image.tmdb.org/t/p/w500/' + filme.poster_path" :alt="filme.original_title"
