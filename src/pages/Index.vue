@@ -30,7 +30,7 @@
                     <q-input type="password" v-model="credentials.password" />
                   </q-field>
                   <div class="submit row reverse" style="margin-top: 20px;">
-                    <q-btn color="primary" @click="logado = 1">Logar</q-btn>
+                    <q-btn color="primary" @click="logar">Logar</q-btn>
                     <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;" @click="telaRegistro = 1">Registrar</q-btn>
                   </div>
                 </div>
@@ -58,6 +58,13 @@
                 <div class="layout-view layout-padding">
                   <q-field
                     icon="cloud"
+                    label="Nome do usuário"
+                    helper="Helper"
+                  >
+                    <q-input v-model="credentials.name" />
+                  </q-field>
+                  <q-field
+                    icon="cloud"
                     label="Email de autenticação"
                     helper="Helper"
                   >
@@ -71,7 +78,8 @@
                     <q-input type="password" v-model="credentials.password" />
                   </q-field>
                   <div class="submit row reverse" style="margin-top: 20px;">
-                    <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;" @click="telaRegistro = 0">Registrar</q-btn>
+                    <q-btn color="secondary" style="margin-left: 10px; margin-right: 10px;" @click="registrar">Registrar</q-btn>
+                    <q-btn color="primary" style="margin-left: 10px; margin-right: 10px;" @click="telaRegistro = 0">Voltar</q-btn>
                   </div>
                 </div>
               </div>
@@ -88,7 +96,7 @@
             Lançamentos
           </q-toolbar-title>
 
-          <div><a href="#" style="color: #FFF;" @click="logado = 0">Sair</a></div>
+          <div><a href="#" style="color: #FFF;" @click="deslogar">Sair</a></div>
         </q-toolbar>
       </q-header>
 
@@ -162,7 +170,7 @@ export default {
   data: function () {
     return {
       titulo: 'PopFilmes',
-      credentials: { password: '', email: '' },
+      credentials: { password: '', email: '', name: '' },
       logado: 0,
       telaRegistro: 0,
       filmes: [],
@@ -185,6 +193,36 @@ export default {
       this.$axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f661bc3a7d6de05dd66918f3816b5c45&language=pt-BR').then((response) => {
         this.filmes = response.data.results
       })
+    },
+    logar () {
+      let self = this
+      let email = this.credentials.email
+      let password = this.credentials.password
+      this.$axios.post('http://apiauth.localhost/api/login?password=' + password + '&email=' + email)
+        .then((response) => {
+          self.logado = 1
+        })
+        .catch((error) => {
+          alert('Login Inválido! ' + error.message)
+          self.logado = 0
+        })
+    },
+    registrar () {
+      let self = this
+      let name = this.credentials.name
+      let email = this.credentials.email
+      let password = this.credentials.password
+      this.$axios.post('http://apiauth.localhost/api/register?password=' + password + '&email=' + email + '&name=' + name)
+        .then((response) => {
+          self.telaRegistro = 0
+          alert('Registrado com sucesso!')
+        })
+        .catch((error) => {
+          alert('Erro ao registrar ' + error.message)
+        })
+    },
+    deslogar () {
+      this.logado = 0
     }
   }
 }
